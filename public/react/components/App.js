@@ -41,9 +41,9 @@ export const App = () => {
       {selectedPage ? (
         <>
           <h3>{selectedPage.title}</h3>
-          <h4>Author: {selectedPage.authorId.name}</h4> {/* Update this to fetch the author name if needed */}
+          <h4>Author: {selectedPage.author.name}</h4>
           <p>{selectedPage.content}</p>
-          <h4>Tags: {selectedPage.tags ? selectedPage.tags.join(', ') : 'No tags'}</h4>
+          <h4>Tags: {selectedPage.tags.map(function (tag) { return tag.name; }).join(', ')}</h4>
           <h4>Created At: {new Date(selectedPage.createdAt).toLocaleDateString('en-GB')}</h4>
           <button onClick={handleBackToList}>Back to Wiki List</button>
         </>

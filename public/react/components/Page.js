@@ -29,7 +29,7 @@ export const Page = (props) => {
 
   return (
     <>
-      <h3 onClick={handleClick} style={{ cursor: 'pointer', color: 'blue' }}>{props.page.title}</h3>
+      <h3 onClick={handleClick} style={{ cursor: 'pointer' }}>{props.page.title}</h3>
       {/* Only show author, content, tags, and createdAt if selectedPage is not null */}
     </>
   );
