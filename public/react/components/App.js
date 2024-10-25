@@ -1,31 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import { PagesList } from './PagesList'
-
-// import and prepend the api url to any fetch calls
-import apiURL from '../api'
+import React, { useEffect, useState } from 'react';
+import { PagesList } from './PagesList';
+import apiURL from '../api';
 
 export const App = () => {
-  const [pages, setPages] = useState([])
+  const [pages, setPages] = useState([]);
+  const [selectedPage, setSelectedPage] = useState(null);
 
   useEffect(() => {
-    async function fetchPages () {
+    async function fetchPages() {
       try {
-        const response = await fetch(`${apiURL}/wiki`)
-        const pagesData = await response.json()
-        setPages(pagesData)
+        const response = await fetch(`${apiURL}/wiki`);
+        const pagesData = await response.json();
+        setPages(pagesData);
       } catch (err) {
-        console.log('Oh no an error! ', err)
+        console.log('Oh no an error! ', err);
       }
     }
 
-    fetchPages()
-  }, [])
+    fetchPages();
+  }, []);
+
+  const handlePageClick = async (slug) => {
+    try {
+      const response = await fetch(`${apiURL}/wiki/${slug}`);
+      const pageData = await response.json();
+      setSelectedPage(pageData);
+    } catch (err) {
+      console.log('Error fetching page details:', err);
+    }
+  };
+
+  const handleBackToList = () => {
+    setSelectedPage(null);
+  };
 
   return (
-		<main>
+    <main>
       <h1>WikiVerse</h1>
-			<h2>An interesting 📚</h2>
-			<PagesList pages={pages} />
-		</main>
-  )
-}
+      <h2>An interesting 📚</h2>
+      {selectedPage ? (
+        <>
+          <h3>{selectedPage.title}</h3>
+          <h4>Author: {selectedPage.authorId.name}</h4> {/* Update this to fetch the author name if needed */}
+          <p>{selectedPage.content}</p>
+          <h4>Tags: {selectedPage.tags ? selectedPage.tags.join(', ') : 'No tags'}</h4>
+          <h4>Created At: {new Date(selectedPage.createdAt).toLocaleDateString('en-GB')}</h4>
+          <button onClick={handleBackToList}>Back to Wiki List</button>
+        </>
+      ) : (
+        <PagesList pages={pages} onPageClick={handlePageClick} />
+      )}
+    </main>
+  );
+};

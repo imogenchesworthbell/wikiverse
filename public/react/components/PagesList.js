@@ -1,12 +1,12 @@
-import React from 'react'
-import { Page } from './Page'
+import React from 'react';
+import { Page } from './Page';
 
-export const PagesList = ({ pages }) => {
-  return <>
-		{
-			pages.map((page, idx) => {
-				return <Page page={page} key={idx} />
-			})
-		}
-	</>
-}
+export const PagesList = ({ pages, onPageClick }) => {
+  return (
+    <>
+      {pages.map((page, idx) => (
+        <Page key={idx} page={page} onPageClick={onPageClick} />
+      ))}
+    </>
+  );
+};
