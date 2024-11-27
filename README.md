@@ -1,5 +1,10 @@
 ![logo](https://user-images.githubusercontent.com/44912347/202296600-c5f247d6-9616-49db-88f0-38433429d781.jpg)
 
+# How to run
+
+- Open two sepearate terminals 
+- In the first one - npm run server-dev
+- In the second one - npm run client-dev
 # Wikiverse
 You are a creative content developer that needs a better system for publishing articles. You stumble across a great example called [Wikipedia](https://en.wikipedia.org/wiki/React_(JavaScript_library)) and decide to implement something like it, with a twist: You’ll build it as a Single Page Application, using React! ⚛️
 
